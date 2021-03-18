@@ -4,16 +4,16 @@
 
 ## 前言
 
-因為一位朋友的介紹，最近對在手機上運作 Linux 很著迷。雖然也不知道運作後要幹嘛就是了 XD
+因為一位朋友的介紹，最近對 "在手機上運作 Linux" 這件事很著迷。雖然也不知道運作後要幹嘛就是了 XD 反正就是好玩咩~
 
-這類的 App 在 Android 上比較多，但除非你的裝置有 root 過，否則使用一些系統資源時會遭遇限制。
+這類的 App 在 Android 上比較多，但除非你的裝置有 root 過，否則使用上會遭遇一些限制。
 
-前幾天無聊試著在 Apple App Store 上打關鍵字，結果看到一個有趣的 App -- iSH
+前幾天無聊試著在 Apple App Store 上搜關鍵字，結果看到一個有趣的 App -- **iSH** (點下圖跳 App Store)
 
 
 [![](images/icon.png)](https://apps.apple.com/us/app/ish-shell/id1436902243)
 
-iSH 的官網在[這邊](https://ish.app/)，網站上的標題就告訴你 "The Linux shell for iOS." 感覺可以玩看看。
+iSH 的官網在[這邊](https://ish.app/)，網站上的標題就告訴你 "The Linux shell for iOS." 感覺好像很厲害，可以玩看看。
 
 
 ## 官方資源 
@@ -23,17 +23,17 @@ iSH 的官網在[這邊](https://ish.app/)，網站上的標題就告訴你 "The
 
 你所有需要知道的內容都寫在 GitHub 所附的 [WiKi](https://github.com/ish-app/ish/wiki) 分頁中。
 
-這篇只是 Quickstart Guide，所以我只提幾篇我認為你應該要先看的:
+因為這篇定位在 Quickstart Guide，所以我只列出幾篇我認為你應該要先看的:
 
 * **(Help) [User Interface](https://github.com/ish-app/ish/wiki/User-Interface)**
 
-原則上你一裝好，打開 App，馬上就進入了一個 Linux 環境，iSH 使用的 distro 是 [Alpine Linux](https://zh.wikipedia.org/wiki/Alpine_Linux)，是個適用於嵌入式系統的微型 Linux。
+原則上一裝好 iSH、打開 App，馬上就會進入一個 Linux shell 環境。iSH 使用的 distro 是 [Alpine Linux](https://zh.wikipedia.org/wiki/Alpine_Linux)，是個適用於嵌入式系統的微型 Linux。
 
-這篇 [User Interface](https://github.com/ish-app/ish/wiki/User-Interface) 你應該要先看，稍微了解一下在 iSH 的環境中怎麼操作鍵盤。
+你應該要先看這篇，了解在 iSH 的環境中怎麼操作鍵盤。
 
 ![](images/iphone-keyboard.png)
 
-我過去曾用過一些 iOS 上的 SSH Apps，這些 App 在連線主機後都會有鍵盤讓你輸入，但說真的他們都沒有像 iSH 做得那樣好! iSH 的鍵盤配置是我目前看過最好的。看它將 Tab、Ctrl、Esc 鍵獨立出來就知道它真的是為了 Linux 的使用者設計的。
+我過去曾用過一些 iOS 上的 SSH Apps，這些 App 在連線主機後都會提供鍵盤讓你輸入，但說真的他們都沒有 iSH 做得那樣好 -- iSH 的鍵盤配置是我目前看過最好的。看它特別將 Tab、Ctrl、Esc 鍵獨立出來就知道它真的是為了 Linux 的使用者設計的。
 
 
 * **(Help) [Using iSH](https://github.com/ish-app/ish/wiki/Using-iSH)**
@@ -43,19 +43,19 @@ iSH 的官網在[這邊](https://ish.app/)，網站上的標題就告訴你 "The
 
 * **(Help) [What works?](https://github.com/ish-app/ish/wiki/What-works%3F)**
 
-iSH 的 shell 環境中有些指令是不 work 的，這邊有列一張表格。
+iSH 的 shell 環境中有些指令是不 work 的，這裡整理了一份表格。
 
 
 * **(Tutorials) [Install & Activate Alternate Filesystems](https://github.com/ish-app/ish/wiki/Install-&-Activate-Alternate-Filesystems)**
 
-iSH 的運作方式似乎是幫你 boot 一個 Filesystems。這篇文章告訴你如何啟用一個客製化的 Filesystems。
+iSH 的運作方式是幫你 bootup 一個 Filesystems。這篇文章告訴你如何啟用一個客製化的 Filesystem。
 
-裡面所示範的是去下載 Alpine Linux 的 Filesystems，然後在 iSH App 中啟動它。
+文件示範是下載 Alpine Linux 的 Mini Root Filesystem，然後在 iSH App 中啟動它。
 
 
 * **(Tutorials) [Running an SSH server](https://github.com/ish-app/ish/wiki/Running-an-SSH-server)**
 
-雖然 iSH 的鍵盤很好用，但是若可以透過 SSH 連進去 Alpine Linux 的環境更好，你就可以使用一般的鍵盤下指令了。這篇文章教你如何啟用 SSH server。
+雖然 iSH 的鍵盤很好用，但是若可以透過 SSH 連進去 Alpine Linux 的環境會更好，就可以使用一般的鍵盤下指令了。這篇文章教你如何啟用 SSH server。
 
 
 ## 其他資源
@@ -68,16 +68,16 @@ iSH 的運作方式似乎是幫你 boot 一個 Filesystems。這篇文章告訴�
 
 * [Mirror health - Alpine Linux](https://mirrors.alpinelinux.org/)
 
-你需要設定 apk repository 的 URLs 才能從網路下載套件。為了讓下載速度更快，你需要在上面查詢離你最近的站台。
+你需要設定 apk repository 的 URLs 才能從網路下載套件。為了讓下載速度更快，你需要在上面查詢離你最近的 mirror 站台。
 
 
 ## iSH 操作紀錄
 
 下面的操作會嘗試下載 Alpine Linux 的 Filesystem tarball 到 iphone 中，然後從 iSH App 中 bootup 它。
 
-也會嘗試在 iSH 提供的 Alpine Linux 環境中架設 SSH server，讓我能從另一台電腦 ssh 進去。
+也會嘗試在 iSH 提供的 Alpine Linux 環境中架設 SSH server，讓我能從另一台電腦以 ssh 登入。
 
-這些圖是我邊操作邊截圖的，可能有一些指令會得到錯誤的結果，就當作筆記吧。
+這些圖是我邊操作邊截圖的，可能有一些指令會得到錯誤的結果，就當作筆記吧 :p
 
 我所使用的手機是 iPhone 6s Plus 128GB, iOS 11.0.2。透過連線 WiFi 路由器出 internet。
 
@@ -85,13 +85,13 @@ iSH 的運作方式似乎是幫你 boot 一個 Filesystems。這篇文章告訴�
 ### 1. 下載並啟用 Filesystem
 
 
-**iSH App 啟動後，會馬上進入一個 linux shell**。從歡迎畫面的字串看，是 Alpine Linux。它還提示是你可以用 `apk add <package>` 來安裝套件。
+iSH App 啟動後，會馬上進入一個 linux shell。從歡迎畫面的字串看，是 Alpine Linux。它還提示是你可以用 `apk add <package>` 來安裝套件。
 
 ![](images/iSH-alpine_01.png)
 
 如果沒有網路連線能力，Linux 系統等於廢了武功。我測試 `netstat` 的指令，結果是失敗的。原因可能是它根本沒有對應的 proc filesystem。
 
-`ps` 的指令可以用，行程很少耶。
+`ps` 的指令可以用...行程很少耶 @@
 
 `dmesg` 沒有顯示出訊息。這可能表示啟動這個系統並沒有經過 bringup linux kernel 的動作。而是直接從 user space 的 init 開始。
 
@@ -108,7 +108,7 @@ init 系統使用的是 OpenRC，而不是目前桌上型 distro 主流的 syste
 
 根據手冊試著去 Alpine Linux 的 [下載頁](https://alpinelinux.org/downloads/)，找到 Mini Root Filesystem 的分類，然後下載 x86 的 tarball。
 
-檔名是: alpine-minirootfs-3.13.2-x86.tar.gz (其實你把它解壓縮你就知道是怎麼一回事了)
+目前最新的檔名是: **alpine-minirootfs-3.13.2-x86.tar.gz** (其實你用 `tar -zxvf` 把它解壓縮你就知道是怎麼一回事了)
 
 ![](images/iSH-alpine_04.png)
 
@@ -116,19 +116,19 @@ iSH App 可以將剛剛的 rootfs tarball import 進 App 中。但是你需要�
 
 我選擇的是 Dropbox，所以你需要先將這個 tarball 上傳到你 Dropbox 的空間。手機也要裝 Dropbox App。
 
-然後點鍵盤右邊 **i** 的圖示進入設定頁面。
-
-點選 `Filesystems`
+然後點 iSH 鍵盤右邊 **(i)** 的圖示進入設定頁面。進入後點選 `Filesystems`。
 
 ![](images/iSH-alpine_05.png)
 
-你會看到目前 iSH 運作的 rootfs 是 default。事實上我猜他跟我下載的 tarball 應該是一樣的 XD 但是還是手動作一次測試吧。
+你會看到目前 iSH 運作的 rootfs 是 default。事實上我猜它跟我剛剛下載的 tarball 應該是一樣的 XD 但是還是手動做一次測試吧。
 
 點選右上方的 `Import`。
 
 ![](images/iSH-alpine_06.png)
 
-這個畫面就不是 iSH 的畫面了，是 iOS 用來做 App 之間交換資料的畫面。如果你的 iphone 有裝 Dropbox App 也設定好。你應該可以點選到你剛剛上傳的 tarball。點選檔案後，iSH 就會從 Dropbox 上將檔案下載回來。
+這個畫面就不是 iSH 的畫面了，是 iOS 用來做 App 之間交換資料的畫面。如果你的 iphone 有裝 Dropbox App 也設定好。你應該可以點選到你剛剛上傳的 tarball。
+
+點選檔案後，iSH 就會從 Dropbox 上將檔案下載回來。
 
 ![](images/iSH-alpine_07.png)
 
@@ -157,15 +157,15 @@ iSH App 可以將剛剛的 rootfs tarball import 進 App 中。但是你需要�
 
 原本以為網路根本不通。結果好奇做了 ping test 發現可以出 internet 耶!!
 
-這就有趣了，代表雖然 ifconfig 指令無法執行，但是系統的網路是有出去的，喔耶!! 
+這就有趣了，代表雖然 ifconfig 指令無法執行，但是系統的網路是有通的，喔耶!! 
 
 ![](images/iSH-alpine_11.png)
 
-只要網路沒問題，接下來應該就容易多了。你要去查 [Alpine Linux 的套件管理文件](https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management)。他告訴你要將套件下載的 URLs 寫在這個設定檔。
+只要網路沒問題，接下來應該就容易多了。你要去查 [Alpine Linux 的套件管理文件](https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management)。他會告訴你要將套件下載的 repo URLs 寫在這個設定檔。
 
 ![](images/iSH-alpine_12.png)
 
-為了讓下載更快，你可以去查台灣的 mirror 站台。
+為了讓下載更快，你還可以去查台灣的 mirror 站台。
 
 ![](images/iSH-alpine_13.png)
 
@@ -185,7 +185,7 @@ vi /etc/apk/repositories
 
 ![](images/iSH-alpine_14.png)
 
-加上這兩行即可。其實下面的 `file://` 可以註解掉，否則等等 apk 的指令會出現錯誤訊息 (不影響下載)
+加上這兩行即可。其實下面的 `file://` 可以註解掉，否則等等 apk 的指令會出現 WARNING 訊息，雖然不影響下載安裝，但看了討厭 XD
 
 ```
 http://alpine.ccns.ncku.edu.tw/alpine/v3.12/main
@@ -237,7 +237,7 @@ apk 安裝的方式是用 add -- 執行 `apk add openssh`
 
 ![](images/iSH-alpine_22.png)
 
-這邊就是 Linux 的知識了。你必須知道如果你要使用 root 身分透過 ssh 登入，你需要改那些地方:
+這邊就是 Linux 的知識了。你必須知道當你打算使用 root 身分透過 ssh 登入時，你需要改那些地方:
 
 ```
 vi /etc/ssh/sshd_config
@@ -250,19 +250,19 @@ vi /etc/ssh/sshd_config
 
 ![](images/iSH-alpine_24.png)
 
-執行 `ssh-keygen -A` 替系統產生 hostkeys。注意! 這個步驟有點久 (當然不是半小時那種久)，第一執行時我以為它當了，結果等一會之後，就執行成功了。
+執行 `ssh-keygen -A` 替系統產生 hostkeys。注意! 這個步驟有點久 (當然不是半小時那種久)。第一執行時我以為它當了，結果等一會之後，就執行成功了。
 
 你可以看到它應該將 key 產生在 `/etc/ssh` 這個路徑下
 
 ![](images/iSH-alpine_25.png)
 
-系統的時間有點不準，但以 `date` 查詢可以知道檔案是剛剛產生的。
+系統的時間有點不準，但以 `date` 查詢比對可以知道檔案是剛剛產生的。
 
 ![](images/iSH-alpine_26.png)
 
-這邊我有點搞錯了，hostkey 跟使用者 ssh 進去要交換的 key 應該是兩件事。所以我根本沒必要將 public key 傳到另一台主機。但是就當作是順便測試 scp 指令吧。
+這邊我有點搞錯了，hostkey 跟使用者 ssh 進去要交換的 key 應該是兩件事。所以我根本沒必要將 public key 傳到另一台主機。但是就當作是順便測試 scp 指令吧 :p
 
-我發現竟然可以 ping 到網域內的主機。
+首先，我發現可以 ping 到網域內的另一台主機。
 
 ![](images/iSH-alpine_27.png)
 
@@ -280,7 +280,7 @@ vi /etc/ssh/sshd_config
 
 ![](images/iSH-alpine_30.png)
 
-我一直很好奇當我的 iSH 在 iphone 上執行，並啟用了一個 Linux shell 環境時，這個 shell 環境對外的 ip 到底是誰？該不會就是手機的 IP 吧？
+我一直很好奇當 iSH 在我的 iphone 上執行，並啟用了一個 Linux shell 環境時，這個 shell 環境對外的 IP 到底是誰？該不會就是手機的 IP 吧？
 
 所以我先查了 iphone 的 IP -- 172.16.99.x 是 WiFi router 配給我 iphone 的 IP。
 
@@ -288,7 +288,7 @@ vi /etc/ssh/sshd_config
 
 然後我找一台同網段的 Linux 主機，ssh iphone 的 IP...成功!!!
 
-真的連入 iphone 內的　Alpine Linux 了!!!
+真的連入 iphone 內的 Alpine Linux 了!!!
 
 ![](images/iSH-alpine_32.png)
 
