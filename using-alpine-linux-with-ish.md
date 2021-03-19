@@ -1,10 +1,11 @@
-# iSH Alpine Linux 實驗
+# iSH Alpine Linux 實驗紀錄
 
 ---
 
+
 ## 關於這篇文章
 
-這篇文章記錄一些我安裝玩 Alpine Linux on iSH 後的一些實驗和測試。
+這篇文章用來記錄我透過 iSH 安裝 Alpine Linux 後所做的一些實驗。
 
 如果你還沒用過 iSH，請參考我寫的 [iSH Quickstart Guide](README.md)。
 
@@ -22,9 +23,14 @@ ps: 在這篇文章中，如果我提到 "Alpine Linux" 或是簡稱 "Alpine"，
 5. 筆電端以 ssh 連線 iphone IP
 6. 結果: 可以成功連進 iSH 內的 Alpine Linux
 
-與 Android 不同的是，iphone 熱點開啟的時候，DHCP 配發的 ip range 會落在一個網段區間內 172.20.10.x。iphone 本身的 gateway ip 通常是 172.20.10.1。所以當你的筆電接入了 iphone 的熱點，應該會拿到 172.20.10.x 的 ip。這時候只需要 ssh 連線 172.20.10.1 就可以進入 Alpine Linux 了。
+與 Android 不同的是，開啟 iphone 熱點功能時，DHCP 配發的 ip range 會落在 172.20.10.0 ~ 172.20.10.15 的區間內。扮演 gateway 角色的 iphone 本身的 ip 通常是 172.20.10.1。
 
-這個特性的應用就非常有趣了，我可以在 iSH 的 Linux 環境中架設伺服器。然後我就有一台移動式的伺服器可隨時測試使用了，你可能不會隨時帶著一台 pi zero，但是你通常會隨身帶著手機。透過熱點分享後，手機拿到哪都可以快速建構一個區網測試環境。
+當你使用筆電接入了 iphone 的熱點，應該會拿到 172.20.10.x 的 ip。這時候只需要 ssh 連線到 172.20.10.1 就可以進入 Alpine Linux 的 shell 環境了。
+
+
+### 應用想法
+
+這個特性的應用就非常有趣了，**因為我可以在 iSH 的 Linux 環境中架設伺服器**。我就能有一台移動式的伺服器可以隨時測試使用了，你可能不會願意隨身帶著一片 [pi zero](https://www.raspberrypi.org/products/raspberry-pi-zero/)，但你通常會隨身帶著手機。透過熱點分享後，手機拿到哪都可以快速建構一個區網測試環境。
 
 
 ## iSH 背景執行
