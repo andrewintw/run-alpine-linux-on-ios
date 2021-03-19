@@ -23,30 +23,30 @@ ps: 在這篇文章中，如果我提到 "Alpine Linux" 或是簡稱 "Alpine"，
 5. 筆電端以 ssh 連線 iphone IP
 6. 結果: 可以成功連進 iSH 內的 Alpine Linux
 
-與 Android 不同的是，開啟 iphone 熱點功能時，DHCP 配發的 ip range 會落在 172.20.10.0 ~ 172.20.10.15 的區間內。扮演 gateway 角色的 iphone 本身的 ip 通常是 172.20.10.1。
+與 Android 不同的是，開啟 iphone 熱點功能時，DHCP 所配發的 ip range 會落在 172.20.10.0 ~ 172.20.10.15 的區間內。扮演 gateway 角色的 iphone 本身的 ip 通常是 172.20.10.1。
 
-當你使用筆電接入了 iphone 的熱點，應該會拿到 172.20.10.x 的 ip。這時候只需要 ssh 連線到 172.20.10.1 就可以進入 Alpine Linux 的 shell 環境了。
+使用筆電接入 iphone 的熱點後，應該會拿到 172.20.10.x 的 ip。這時候只需要 ssh 連線到 172.20.10.1 就可以進入 Alpine Linux 的 shell 環境了。
 
 
 ### 應用想法
 
-這個特性的應用就非常有趣了，**因為我可以在 iSH 的 Linux 環境中架設伺服器**。我就能有一台移動式的伺服器可以隨時測試使用了，你可能不會願意隨身帶著一片 [pi zero](https://www.raspberrypi.org/products/raspberry-pi-zero/)，但你通常會隨身帶著手機。透過熱點分享後，手機拿到哪都可以快速建構一個區網測試環境。
+如果我在 iSH 的 Linux 環境中架設了伺服器，就等於我有一台隨身的伺服器可以隨時啟用做測試了。你可能不會願意隨身帶著一片 [Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero/)，但你通常會隨時帶著手機。透過熱點分享後，手機拿到哪都可以快速建構一個區網測試環境。
 
 
 ## iSH 背景執行
 
-根據測試結果，當 iSH App 在背景執行的時候 (例如按了手機 HOME 鍵)，ssh 會無法連線。似乎 iSH 必須在前景運作時，ssh 連線的行為才能正常使用。
+根據測試結果，當 iSH App 在背景執行的時候 (例如按了手機的 HOME 鍵)，ssh 會無法連線。iSH 必須在前景運作時，ssh 才能正常連線使用。
 
-同理當手機進入休眠的時候，Alpine Linux 也會停止運作。你可以設定讓手機不進入休眠，或是進入 iSH 的設定頁面中開啟 `Disable Screen Dimming` (他的意思其實是 "Keep screen turned on")
+同理當手機進入螢幕休眠時，Alpine Linux 也會停止運作。你可以設定讓手機不進入螢幕休眠模式，或是進入 iSH 的設定頁面中，開啟 `Disable Screen Dimming` (意思其實是 "Keep screen turned on")，然後保持 iSH 在前景執行即可。
 
 ![](images/iSH-alpine_35.png)
 
 
-## iPhone 換 ip
+## iPhone 換 IP
 
-測試時我先讓 iphone 熱點開啟，確定筆電連上熱點後，ssh 可以登入 Alpine Linux。接著我立刻將熱點停用，改讓 iphone 和筆電連線同一台 wifi router。
+測試方法: 先讓 iphone 熱點開啟，確定筆電連上熱點後，確認 ssh 可以登入 Alpine Linux。接著立刻將熱點停用，改讓 iphone 和筆電以 wifi 連到同一台 wifi router。
 
-結果是 ssh 連線會斷，似乎無法立刻切換網路。你需要在 Alpine 上依照下面的指令重新啟動 sshd。ssh 再重新連線即可。
+結果是 ssh 連線會斷，Alpine 端似乎無法立刻切換網路。你可以在 Alpine 上依照下面的指令重新啟動 sshd。ssh 即可再連線成功。
 
 
 ```
@@ -64,7 +64,7 @@ PID   USER     TIME  COMMAND
    10 root      0:00 /sbin/getty 38400 tty4
    11 root      0:00 /sbin/getty 38400 tty5
    12 root      0:00 /sbin/getty 38400 tty6
-   16 root      0:00 sshd: /usr/s d			# <== 有啟動
+   16 root      0:00 sshd: /usr/s d		# <== 有啟動
    18 root      0:00 sshd: root@pts/ R
    20 root      0:00 -ash
    21 root      0:00 ps
@@ -73,14 +73,14 @@ andrew:~#
 
 ## 安裝 vim
 
-iSH 安裝的 Alpine 預設的 vi 指令其實是 busybox 提供的
+Alpine Linux 預設的 vi 指令其實是 busybox 提供的
 
 ```
 andrew:~# ls -l `which vi`
 lrwxrwxrwx    1 root     root            12 Mar 18 11:48 /usr/bin/vi -> /bin/busybox
 ```
 
-所以打開設定檔或是程式碼的時候，都不會有 syntax highlighting 的功能。如下圖...很乏味 XD
+所以以 vi 開啟設定檔或是程式碼，都不會有 syntax highlighting 的功能。如下圖全白一片...很乏味 XD
 
 ![](images/iSH-alpine_37.png)
 
@@ -99,7 +99,7 @@ andrew:~# ls -l `which vim`
 -rwxr-xr-x    1 root     root       2739884 May 15  2020 /usr/bin/vim
 ```
 
-裝完 vim 後預設的 syntax highlight color scheme 我不喜歡，而且預設的 tab 是 8 個空白，所以我會再做些額外的設定。
+裝完 vim 後，它預設的 color scheme 我不喜歡，而且 vim 預設 tab 是 8 個空白，所以我會再做些額外的設定。
 
 ![](images/iSH-alpine_38.png)
 
@@ -140,7 +140,7 @@ andrew:~/.vim/autoload# cd ~
 andrew:~# 
 ```
 
-我喜歡 molokai 這個 molokai color scheme
+我喜歡 molokai 這個 color scheme (以 git 安裝)
 
 ```
 andrew:~# cd ~/.vim/bundle
@@ -160,7 +160,7 @@ molokai 的色彩配置
 ![](images/iSH-alpine_41.png)
 
 
-下載我自己習慣的設定檔 (~/.vimrc)
+下載我自己習慣的設定檔 ([~/.vimrc](https://raw.githubusercontent.com/andrewintw/skel-home/master/config/vimrc))
 
 ```
 andrew:~# wget https://raw.githubusercontent.com/andrewintw/skel-home/master/config/vimrc
@@ -171,7 +171,7 @@ vimrc                100% |******************|  2381  0:00:00 ETA
 andrew:~# mv vimrc .vimrc
 ```
 
-將 vi link 到 vim。通常會透過 alias 來做，但這算是嵌入式系統，就自己硬來改 symbolic link 吧!
+將 vi link 到 vim。通常這個動作會透過 alias 來做，但這算是個嵌入式系統，就簡單自己硬改 symbolic link 吧!
 
 ```
 andrew:~# ls -l `which vi`
@@ -191,11 +191,11 @@ andrew:/usr/bin#
 
 ## 架設 MQTT server
 
-剛剛提到手機因為有熱點這個優勢，所以可以透過熱點隨時讓手機配合 iSH 變身為一個行動測試伺服器，那就來測試看看吧。
+剛剛提到手機因為有熱點這個優勢，所以可以透過熱點隨時讓手機配合 iSH 變身為一個 **"行動測試伺服器"**，那就來測試看看吧。
 
-這邊我想測試的是 MQTT Broker!! 因為之前在 Apple App Store 上查詢 MQTT，其實找到的 Apps 都是 MQTT client 的 Apps。似乎沒有 MQTT Broker 的 App。既然我現在能在 iOS 上啟用一個 Linux 環境，Linux 對外的網路也是通的，應該可以試著弄個 MQTT Broker 吧!
+我非常想測試的是 MQTT Broker!! 因為目前在 Apple App Store 上查詢 MQTT，其實找到的 Apps 都是 MQTT client 的工具。似乎沒有 MQTT Broker 的 App。既然能在 iOS 上啟用一個 Linux 環境，這個 shell 環境對外的網路也是通的，應該可以試著弄個 MQTT Broker 吧!
 
-搜尋使否有 mosquitto 可以使用 --- 有!
+搜尋使否有 mosquitto 可以使用...有耶!
 
 ```
 andrew:~# apk update
@@ -238,7 +238,7 @@ OK: 19 MiB in 29 packages
 andrew:~# 
 ```
 
-因為我只是要把 iphone 當作 MQTT broker，所以 mosquitto-clients 我就不安裝了。
+因為我只想把 iphone 當作 MQTT broker，所以 mosquitto-clients 我就不安裝了。
 
 確認是否有安裝，順便玩一下 apk 指令:
 
@@ -272,7 +272,7 @@ file
 c-ares
 mosquitto-libs
 libwebsockets
-mosquitto		# <== 這裡
+mosquitto	# <== 這裡
 ```
 
 查查 mosquitto 裝了什麼東西:
@@ -287,7 +287,6 @@ etc/mosquitto/pwfile.example
 usr/bin/mosquitto_passwd
 usr/bin/mosquitto_rr
 usr/sbin/mosquitto
-
 andrew:~# 
 ```
 
@@ -347,7 +346,7 @@ PID   USER     TIME  COMMAND
    84 root      0:00 ps
 ```
 
-啟動後我在筆電上使用 MQTTBox 做 MQTT subscribe & publish 的測試，正常執行!
+啟動後我在筆電上使用 MQTTBox 做 MQTT subscribe & publish 的測試，可正常執行!!!
 
 ![](images/iSH-alpine_39.png)
 
@@ -360,23 +359,20 @@ PID   USER     TIME  COMMAND
 
 ### 為什麼要研究這件事情?
 
-你可以發現每次我們要啟用 sshd 或是 mosquitto 時，我都需要自己手動打指令，而不是由系統自動將服務帶起的。
+到目前為止，每次要啟用 sshd 或是 mosquitto 時，都需要自己手動打指令，而不是由系統自動將服務帶起的。
 
-在一般 Linux 系統中，這些服務的啟用都是由一個稱為 Init System 所處理的。Linux 發展至今已經有幾個 Init System 了。目前主流的 Linux distro 幾乎都使用 systemd。而 Alpine 所使用的 Init System 則是一個適用於嵌入式系統的 OpenRC。
+在一般 Linux 系統中，這些服務的啟用都是由 "Init System" 所處理的。Linux 發展至今已經有幾個 Init System 了。目前主流的 Linux distro 幾乎都使用 systemd。而 Alpine 所使用的 Init System 則是一個適用於嵌入式系統的 OpenRC。
 
 
 ### iSH 上啟用 OpenRC
 
-參考 iSH 官方 WiKi 的這份文件:
+參考 iSH 官方 WiKi 的文件:
 
 * **(Tutorials) [How To Enable OpenRC & Start Services When iSH App Starts](https://github.com/ish-app/ish/wiki/How-To-Enable-OpenRC-&-Start-Services-When-iSH-App-Starts)**
 
-裡面提到 "iSH 1.0.1 (Build 77)" 以後，OpenRC 就無法正常運作了。實際上文件的意思應該是 -- 不是每個 service 都可以透過 OpenRC 啟用。
+裡面提到 "iSH 1.0.1 (Build 77)" 以後，OpenRC 就無法正常運作了。實際上文件的意思應該是 -- 不是每個 service 都可以透過 OpenRC 啟用。目前我所使用的 iSH 版本為 1.1.1 (Build 91)，就來試試看吧!
 
-我目前所使用的 iSH 版本為 1.1.1 (Build 91)，沒關係就來試試看吧!
-
-
-修改 `/etc/inittab`。目前的樣子如下。
+啟用 OpenRC 的起手式就是修改 `/etc/inittab`。目前的樣子如下:
 
 ```
 andrew:~# cat /etc/inittab 
@@ -413,7 +409,7 @@ andrew:~# head  /etc/inittab
 # /etc/inittab
 
 #::sysinit:/sbin/openrc sysinit		# <== 原本樣子
-::sysinit:/sbin/openrc				# <== 修改後
+::sysinit:/sbin/openrc			# <== 修改後
 ::sysinit:/sbin/openrc boot
 ::wait:/sbin/openrc default
 
@@ -422,7 +418,7 @@ tty1::respawn:/sbin/getty 38400 tty1
 tty2::respawn:/sbin/getty 38400 tty2
 ```
 
-修改完當下，目前沒有文件上所說的 rc-status 這個指令，重啟 iSH App
+查了一下，目前我的 fs 沒有文件上所說的 rc-status 這個指令，重啟 iSH App 看看...
 
 ```
 andrew:~# rc-status --help
@@ -432,7 +428,7 @@ andrew:~# poweroff
 andrew:~# 
 ```
 
-重啟 iSH App 後，還是沒有 rc-status 這個指令，看來要自己安裝
+重啟 iSH App 後，還是沒有 rc-status 這個指令，看來要自己安裝了
 
 ```
 andrew:~# apk search rc-status
@@ -443,13 +439,13 @@ andrew:~#
 andrew:~# apk add openrc
 (1/2) Installing openrc (0.42.1-r11)
 Executing openrc-0.42.1-r11.post-install
-(2/2) Installing mosquitto-openrc (1.6.9-r0)	# <== 好像偵測到我有裝 mosquitto 而自動安裝的
+(2/2) Installing mosquitto-openrc (1.6.9-r0)	# <== 偵測到系統有裝 mosquitto 而自動安裝的?
 Executing busybox-1.31.1-r16.trigger
 OK: 69 MiB in 40 packages
 andrew:~# 
 ```
 
-哇喔~ 看來裝了不少東西 @@
+哇喔~ openrc 裝了不少東西 @@
 
 ```
 andrew:~# apk info -L openrc
@@ -623,7 +619,7 @@ usr/share/openrc/support/sysvinit/halt.sh
 usr/share/openrc/support/sysvinit/inittab
 ```
 
-現在有 openrc 相關的指令了
+現在有系統 openrc 相關的指令了
 
 ```
 andrew:~# rc-status --help
@@ -650,9 +646,7 @@ Options: [ acf:lmrsSuChqVv ]
 
 ### 使用 rc-service 啟動服務
 
-很多 init 系統都會提供 `service` 這個指令讓我們快速 start、stop、restart 系統服務。
-
-不意外地 OpenRC 也有，且實際運作的是 rc-service
+很多 init 系統都會提供 `service` 這個指令讓我們快速 start、stop、restart 系統服務。不意外地 OpenRC 也有，且實際執行的是 rc-service
 
 ```
 andrew:~# ls -l `which service`
@@ -684,7 +678,7 @@ Options: [ cdDe:ilr:INsSZChqVv ]
   -q, --quiet                       Run quietly (repeat to suppress errors)
 ```
 
-`rc-service -l` 可以查看目前 OpenRC 可以管理的 services。有看到 mosquitto 耶!
+`rc-service -l` 可以查看目前 OpenRC 可以管理的 services。
 
 ```
 andrew:~# rc-service -l
@@ -706,7 +700,7 @@ localmount
 loopback
 modloop
 modules
-mosquitto
+mosquitto	# <== 有看到 mosquitto 耶!
 mount-ro
 mtab
 net-online
@@ -735,7 +729,7 @@ andrew:~#
 
 因為我目前用 ssh 登入，如果再重啟 sshd 我自己的連線就會斷掉 XD 所以來測試剛剛安裝的 mosquitto 好了...
 
-用 status 參數查詢目前運作狀況...目前是停用的。
+先用 status 參數查詢目前運作狀況...目前是停用的。
 
 ```
 andrew:~# rc-service mosquitto status
@@ -758,7 +752,7 @@ PID   USER     TIME  COMMAND
    56 root      0:00 ps
 ```
 
-BUT 當我嘗試啟用時...@@ 它卡住了
+BUT 當我嘗試啟用時...@@ 它卡住了，iSH 整個變成沒反應的狀態 QQ
 
 ```
 andrew:~# rc-service mosquitto start
@@ -770,17 +764,16 @@ grep: /proc/filesystems: No such file or directory
 ^C
 ``` 
 
-算了，先買個保險好了，iSH 的文件中說 sshd 確定可以執行，所以我將當掉的 iSH 重啟，透過手機打指令啟用 sshd 試試看:
+算了，先買個保險好了，iSH 的文件中提到 sshd 確定可以執行。
 
-下圖是分別執行 `rc-service sshd status` 和 `rc-service sshd start` 的結果...正常運作!
+所以我將當掉的 iSH 重啟後，透過手機打指令啟用 sshd。下圖分別是執行 `rc-service sshd status` 和 `rc-service sshd start` 的結果...都正常運作!
 
 ![](images/iSH-alpine_42.png)
 
 
-但再次啟用 mosquitto 時又出錯了...
+但再次挑戰啟用 mosquitto 時又卡住了...
 
 ![](images/iSH-alpine_43.png)
-
 
 好吧，來看 code 吧!
 
@@ -789,7 +782,7 @@ grep: /proc/filesystems: No such file or directory
 
 打開 mosquitto 的 init script -- `/etc/init.d/mosquitto`
 
-經過一段 try and error 後，真正可以運作的樣子如下
+經過一段時間的 try and error 後，真正可以運作的樣子如下
 
 ```
 andrew:~# cat /etc/init.d/mosquitto 
@@ -800,7 +793,7 @@ andrew:~# cat /etc/init.d/mosquitto
 name="Mosquitto message broker"
 description="MQTT v3.1.1 Message Broker"
 
-mosquitto_args="-d"					# <== 加這一行
+mosquitto_args="-d"			# <== 加這一行
 command="/usr/sbin/mosquitto"
 command_args="$mosquitto_args"
 
@@ -814,7 +807,7 @@ start_pre() {
 
 ```
 
-使用 status 參數查詢狀態後，使用 start 參數啟用 mosquitto
+使用 status 參數查詢狀態；使用 start 參數啟用 mosquitto。
 
 ```
 andrew:~# service mosquitto status
@@ -849,7 +842,7 @@ PID   USER     TIME  COMMAND
 andrew:~# 
 ```
 
-此時測試 MQTT pub/sub 應該會是正常的。
+成功!! 此時測試 MQTT pub/sub 應該會是正常的。
 
 如果要停止服務就使用 stop 參數
 
@@ -884,11 +877,7 @@ andrew:~#
 
 ### 使用 rc-update & rc-status
 
-現在你已經知道如何使用 service 來開關服務了，但是你會發現使用 service 啟用服務後，下次重新開機服務還是不會自動啟用。
-
-要讓服務自動啟用，你需要使用 `rc-update`。
-
-先執行 `rc-status` 查詢目前服務的啟用狀態，下面顯示目前沒有服務啟用。
+執行 `rc-status` 可以查詢目前服務的啟用狀態，下面顯示目前沒有服務啟用。
 
 ```
 andrew:~# rc-status 
@@ -901,7 +890,7 @@ Dynamic Runlevel: manual
 andrew:~# 
 ```
 
-如果使用 service 指令啟用了 sshd，rc-status 的輸出則會像這樣。
+如果使用 service 指令啟用了 sshd，rc-status 的輸出會像這樣:
 
 ```
 andrew:~# rc-status 
@@ -913,7 +902,9 @@ Dynamic Runlevel: manual
 andrew:~# 
 ```
 
-讓 OpenRC 處理自動啟用服務的概念就是先將服務 "add 到啟用清單中"，使用的指令為 rc-update
+現在你已經知道如何使用 service 來開關服務了，但你會發現使用 service 啟用服務後，下次重開 iSH 服務還是不會自動啟用。
+
+要讓 OpenRC 能自動啟用服務，就得先將服務 "add 到啟用隊伍中"，使用的指令為 `rc-update`
 
 ```
 andrew:~# rc-update --help
@@ -956,7 +947,7 @@ andrew:~# tree /etc/runlevels/
 5 directories, 1 file
 ```
 
-重新啟用 iSH App，可以發現 sshd 已經被 OpenRC 自動啟用了，不需要再打指令了!!!
+重新啟用 iSH App，可以發現 sshd 已經被 OpenRC 自動啟用了，不需要再打指令了!!! (幸福快樂的日子 XD)
 
 ```
 andrew:~# poweroff 
@@ -1056,7 +1047,7 @@ andrew:~#
 
 ### OpenRC 學習資源
 
-OpenRC 畢竟不是主流的 Init System，所以資料不多。你可以查看 [OpenRC 官方 GitHub](https://github.com/OpenRC/openrc) 的文件。文件放在 repo 頂層的 .md 檔，想要深入研究可以話可以先看這兩個:
+OpenRC 畢竟不是主流的 Init System，所以資料不多。你可以查看 [OpenRC 官方 GitHub](https://github.com/OpenRC/openrc) 的文件。文件位於 repo 頂層的 .md 檔，想要深入研究可以話可以先看這兩個:
 
 * [OpenRC Users Guide](https://github.com/OpenRC/openrc/blob/master/user-guide.md)
 * [OpenRC Service Script Writing Guide](https://github.com/OpenRC/openrc/blob/master/service-script-guide.md)
@@ -1068,23 +1059,23 @@ OpenRC 畢竟不是主流的 Init System，所以資料不多。你可以查看 
 * [Alpine Linux Init System](https://wiki.alpinelinux.org/wiki/Alpine_Linux_Init_System)
 
 
-## 跨平台編譯
+....... (以下未完成) ........
 
 
-首先要先了解你目前在什麼平台。我使用 `apk add file` 安裝了 file 指令。
+## 移植與跨平台編譯
 
-然後用 file 查詢任何一個二近位檔
+首先要知道你目前在什麼平台。先使用 `apk add file` 安裝 file 指令。然後用 file 查詢任何一個二近位檔，ex: /bin/busybox
 
 ![](images/iSH-alpine_36.png)
 
-file 告訴你，iSH 所運作的 Alpine 是 x86 平台 (Intel 80386)。使用 dynamically linked 產生執行檔。
+file 指令告訴你，透過 iSH 運作的 Alpine Linux 執行在 x86 平台 (Intel 80386) 上。而 busybox 使用 dynamically linked 的方式產生執行檔。
 
 ```
 andrew:~# file /bin/busybox 
 /bin/busybox: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-i386.so.1, stripped
 ```
 
-使用 ldd 查詢 linking 的 shared libs
+可使用 ldd 查詢 busybox linking 的 shared libs。從這也可以發現，Alpine Linux 使用 [Musl](https://zh.wikipedia.org/wiki/Musl) 當作標準 c-lib。
 
 ```
 andrew:~# ldd /bin/busybox 
@@ -1092,7 +1083,7 @@ andrew:~# ldd /bin/busybox
 	libc.musl-x86.so.1 => /lib/ld-musl-i386.so.1 (0xf7f6e000)
 ```
 
-這也可以看得出來，Alpine Linux 使用 [Musl](https://zh.wikipedia.org/wiki/Musl) 當作標準 c-lib。
+另一點是，如果我的筆電和 iSH 上的 Alpine 都是 x86 平台，那有需要移植嗎？
 
 
 ### 參考資源
