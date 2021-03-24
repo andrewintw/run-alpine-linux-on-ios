@@ -305,6 +305,24 @@ vi /etc/ssh/sshd_config
 ![](images/iSH-alpine_34.png)
 
 
+測試幾個指令:
+
+```
+andrew:~# 
+andrew:~# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/private/var/mobile/Containers/Shared/AppGroup/45C418EC-83CE-4D6D-AEA7-B20730F2C4DF/roots/default/data
+                     124989716 103655396  17909716  85% /
+andrew:~# 
+
+andrew:~# mount
+devpts on /dev/pts type devpts (rw)
+apk on /ish/apk type apk (rw)
+proc on /proc type proc (rw)
+/private/var/mobile/Containers/Shared/AppGroup/45C418EC-83CE-4D6D-AEA7-B20730F2C4DF/roots/default/data on / type fake (rw)
+andrew:~# 
+```
+
 以上，希望你也覺得有趣 XD
 
 ~ END ~
