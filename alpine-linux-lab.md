@@ -1059,39 +1059,4 @@ OpenRC 畢竟不是主流的 Init System，所以資料不多。你可以查看 
 * [Alpine Linux Init System](https://wiki.alpinelinux.org/wiki/Alpine_Linux_Init_System)
 
 
-....... (以下未完成) ........
-
-
-## 移植與跨平台編譯
-
-首先要知道你目前在什麼平台。先使用 `apk add file` 安裝 file 指令。然後用 file 查詢任何一個二近位檔，ex: /bin/busybox
-
-![](images/iSH-alpine_36.png)
-
-file 指令告訴你，透過 iSH 運作的 Alpine Linux 執行在 x86 平台 (Intel 80386) 上。而 busybox 使用 dynamically linked 的方式產生執行檔。
-
-```
-andrew:~# file /bin/busybox 
-/bin/busybox: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-i386.so.1, stripped
-```
-
-可使用 ldd 查詢 busybox linking 的 shared libs。從這也可以發現，Alpine Linux 使用 [Musl](https://zh.wikipedia.org/wiki/Musl) 當作標準 c-lib。
-
-```
-andrew:~# ldd /bin/busybox 
-	/lib/ld-musl-i386.so.1 (0xf7f6e000)
-	libc.musl-x86.so.1 => /lib/ld-musl-i386.so.1 (0xf7f6e000)
-```
-
-另一點是，如果我的筆電和 iSH 上的 Alpine 都是 x86 平台，那有需要移植嗎？
-
-
-### 參考資源
-
-* [How to Use musl](https://www.musl-libc.org/how.html)
-* [Cross-compiling with musl Toolchains](https://ariya.io/2020/06/cross-compiling-with-musl-toolchains)
-* [git.musl-libc.org](https://git.musl-libc.org/cgit/musl)
-* [Your source for static cross- and native- musl-based toolchains.](https://musl.cc/)
-
-
 ~ END ~
