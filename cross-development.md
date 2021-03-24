@@ -317,7 +317,7 @@ andrew:~/ws#
 ```
 
 
-### 使用跨平台編譯 (cross compiling)
+## 使用跨平台編譯 (cross compiling)
 
 通常嵌入式系統的開發方式很少會用 native compiling，因為 target 端的運算能力通常遠不如 host 端，通訊介面也較少。開發上比較傾向`在 host 端編譯 for target 端的程式`，這個動作就稱為跨平台編譯 (cross compiling)。
 
@@ -431,7 +431,7 @@ andrew:~/ws#
 ```
 
 
-### 參考資源
+## 參考資源
 
 * [How to Use musl](https://www.musl-libc.org/how.html)
 * [Cross-compiling with musl Toolchains](https://ariya.io/2020/06/cross-compiling-with-musl-toolchains)
